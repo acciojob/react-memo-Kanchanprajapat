@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from 'react'
 
-const ReactMemoComponent = React.memo(({ tasks }) => {
-  console.log("ReactMemoComponent re-rendered");
+const ReactMemo = () => {
+    const[skills,setSkills]=useState([])
+    const[skillInput, setSkillInput] = useState("")
+    return (
+        <div>
+            <h1>React.memo</h1>
+            <input id="skill-input"  type='text' onChange={(e)=>setSkillInput(e.target.value)} value = {skillInput}/> 
+            <button id="skill-btn" onClick={()=>setSkills([...skills,skillInput])}>Add Skill</button>
+            <ul id="item-jumbotron">
+                {
+                    skills.map((skill, index)=> <li key={index}>{skill}</li>)
+                }
+            </ul>
+        </div>
+    )
+}
 
-  return (
-    <div>
-      <h2>All Tasks (using React.memo):</h2>
-      <ul>
-        {tasks.map((task, index) => (
-          <li key={index}>{task}</li>
-        ))}
-      </ul>
-    </div>
-  );
-});
-
-export default ReactMemoComponent;
+export default ReactMemo
